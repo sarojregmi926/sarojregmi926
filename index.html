@@ -1,1 +1,179 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            flex-wrap: wrap;
+        }
+
+        .profile-card {
+            position: relative;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            overflow: hidden;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 5px solid #fff;
+        }
+
+        .anniversary-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .name-text {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .rotation-bar {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 3px;
+            background-color: #e74c3c;
+            animation: rotateBar 3s linear infinite;
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .card {
+            cursor: pointer;
+            width: 80px;
+            height: 120px;
+            background-color: #3498db;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .display-image {
+            margin-top: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+        }
+
+        @keyframes rotateBar {
+            0% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            100% {
+                transform: translateX(-50%) rotate(360deg);
+            }
+        }
+
+        @keyframes scaleImage {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 600px) {
+            .profile-card {
+                width: 90%;
+                max-width: none;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-card">
+    <img src="desu.webp" alt="Profile Image" class="profile-image">
+    <div class="anniversary-text">Happy Marriage Anniversary</div>
+    <div class="name-text">Mutu</div>
+    <div class="rotation-bar"></div>
+</div>
+
+<div class="cards-container">
+    <div class="card" onclick="revealImage('card1')">
+        <img id="card1" src="your_image_url_card1.jpg" alt="Card 1">
+    </div>
+    <div class="card" onclick="revealImage('card2')">
+        <img id="card2" src="your_image_url_card2.jpg" alt="Card 2">
+    </div>
+    <div class="card" onclick="revealImage('card3')">
+        <img id="card3" src="your_image_url_card3.jpg" alt="Card 3">
+    </div>
+</div>
+
+<div class="display-image" id="displayImage"></div>
+
+<audio id="backgroundAudio" controls autoplay loop style="display:none;">
+    <source src="a.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+</audio>
+
+<script>
+    function revealImage(cardId) {
+        var card = document.getElementById(cardId);
+        var displayImage = document.getElementById('displayImage');
+        var imageSrc = card.querySelector('img').src;
+
+        displayImage.style.backgroundImage = 'url(' + imageSrc + ')';
+        displayImage.style.display = 'block';
+        displayImage.style.animation = 'scaleImage 0.5s ease-in-out';
+
+        // Hide the displayed image after 3 seconds (adjust as needed)
+        setTimeout(function () {
+            displayImage.style.display = 'none';
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>
